@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\SMS\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\SMS\\.nuget\\packages"
+    ]
+  }
+}

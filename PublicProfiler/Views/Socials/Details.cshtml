@@ -1,0 +1,46 @@
+﻿@using PublicProfiler.Views.Components
+ 
+@model PublicProfiler.Models.Social
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+@(await Html.RenderComponentAsync<SocialEdit>(RenderMode.ServerPrerendered, new {social = Model , baseUrl = "/Socials" }))
+
+<div>
+    <h4>Social</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Website)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SocialMediaURL)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SocialMediaURL)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ActiveSince)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ActiveSince)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.UserId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SocialId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

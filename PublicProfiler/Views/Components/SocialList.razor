@@ -1,0 +1,16 @@
+﻿@using PublicProfiler.Models
+
+<h3>Social List</h3>
+
+<dl>
+    @foreach (Social social in ModelList)
+    {
+        <dt>@social.Website</dt>
+        <dd>@social.User.RealName @social.User.Alias</dd>
+    }
+</dl>
+
+@code {
+    [Parameter]
+    public IEnumerable<Social> ModelList { get; set; }
+}

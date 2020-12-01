@@ -1,0 +1,27 @@
+﻿@using PublicProfiler.Models
+
+<h3>User List</h3>
+
+<dl>
+    @foreach (User user in ModelList)
+    {
+        <dt>@user.Alias @user.RealName</dt>
+
+        if (user.Socials == null)
+        {
+            <dd>Social media info will be presented later</dd>
+        }
+        else
+        {
+            @foreach (Social social in user.Socials)
+            {
+                <dd>@social.SocialMediaURL</dd>
+            }
+        }
+    }
+</dl>
+
+@code {
+    [Parameter]
+    public IEnumerable<User> ModelList { get; set; }
+}

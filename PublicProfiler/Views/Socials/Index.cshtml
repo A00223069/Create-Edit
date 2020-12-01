@@ -1,0 +1,58 @@
+﻿@using PublicProfiler.Views.Components
+
+@model IEnumerable<PublicProfiler.Models.Social>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Social Media Info</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Website)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SocialMediaURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveSince)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Website)
+                </td>
+                <td>
+                    <a href=@Html.DisplayFor(modelItem => item.SocialMediaURL)>@Html.DisplayFor(modelItem => item.SocialMediaURL)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActiveSince)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Alias)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SocialId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.SocialId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SocialId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@(await Html.RenderComponentAsync<SocialList>(RenderMode.ServerPrerendered, new SocialList { ModelList = Model.ToList() }))

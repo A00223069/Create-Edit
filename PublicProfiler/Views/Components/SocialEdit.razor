@@ -1,0 +1,100 @@
+﻿@using System.Web
+@using PublicProfiler.Models
+
+    <h3>Social Edit</h3>
+
+    <form action="@url" method="post">
+
+        <input type="hidden" name="SocialId" value="@social.SocialId" />
+        <label>Website: <input type="text" name="Website" value="@social.Website" /></label>
+        <label>Social Media URL: <input type="text" name="SocialMediaURL" value="@social.SocialMediaURL" /></label>
+        <label>Active Since: <input type="datetime-local" name="SocialMediaURL" value="@social.ActiveSince" /></label>
+        <label>User ID: <input type="hidden" name="UserId" value="@social.UserId" /></label>
+
+   @*     @if (isUserAvailable)
+        {  *@
+
+            <label>User Name: <span>@social.User.Alias, @social.User.RealName</span></label>
+            <input type="hidden" name="User.UserId" value="@social.User.UserId">
+        @*}
+        else
+        {
+            <select>
+            @foreach (User user in _users)
+            { 
+                <option value="@user.UserId">@user.Alias, @user.RealName   </option>
+            }
+            </select>
+        }*@
+
+        <input type="submit" name="submit" value="@buttonMode" />
+    </form>
+
+
+    @code {
+        private Social _social = new Social();
+
+        private string url
+        {
+            get
+            {
+                string ret = String.Empty;
+
+                if (_social.SocialId < 1)
+                {
+                    ret = String.Concat(baseUrl, "/Create").Replace("//", "/");
+                    return ret;
+                }
+                ret = String.Concat(baseUrl, "/Edit", _social.SocialId.ToString()).Replace("//", "/");
+
+                return ret;
+            }
+        }
+
+
+        //  private IEnumerable<User> _users
+
+
+        private string buttonMode
+        {
+            get
+            {
+                if (_social.SocialId < 1)
+                {
+                    return baseUrl;
+                }
+
+                return "Update Post";
+            }
+        }
+
+
+        private bool isUserAvailable
+        {
+            get
+            {
+                if (_social.SocialId < 1)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        [Parameter]
+        public Social social
+        {
+            set
+            {
+                _social = value;
+            }
+            get
+            {
+                return _social;
+            }
+        }
+
+        [Parameter]
+        public string baseUrl { get; set; }
+
+    }
